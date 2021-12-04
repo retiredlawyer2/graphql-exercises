@@ -19,7 +19,6 @@ type Mutation {
 }
 
 type Subscription {
-    count: Int
     comment(postId: ID!): CommentSubscriptionPayload!
     post: PostSubscriptionPayload!
 }
@@ -84,12 +83,18 @@ type Comment {
     post: Post!
 }
 
+enum MutationType {
+    CREATED
+    UPDATED
+    DELETED
+}
+
 type PostSubscriptionPayload {
-    mutation: String!
+    mutation: MutationType!
     data: Post!
 }
 
 type CommentSubscriptionPayload {
-    mutation: String!
+    mutation: MutationType!
     data: Comment!
 }
